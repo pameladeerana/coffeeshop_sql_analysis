@@ -1,4 +1,4 @@
-# Coffee Shop SQL Analysis – Davao City
+# Coffee Shop SQL Analysis â€“ Davao City
 Analyzing coffee shop sales to find revenue leaks.
 
 ## Business Questions
@@ -14,8 +14,8 @@ Analyzing coffee shop sales to find revenue leaks.
 - `coffee_queries.sql` - 5 business queries with explanations
 
 ## Key Insight (from this sample)
-- Latte is top revenue product, Mondays show lowest sales, mornings 8-10am are peak.
-- Recommendation: Run Monday promo to fix slow days.
+- Latte is top revenue product, Tuesdays show lowest sales, mornings 8-10am are peak.
+- Recommendation: Run Tuesday promo to fix slow day.
 
 ## Tools: MySQL / Excel / Davao-based analysis
 Author: Pamela Dee Elegio Rana (@pameladeerana)
