@@ -1,4 +1,4 @@
-# Coffee Shop SQL Analysis – Davao City
+# Coffee Shop Sales Simple SQL Analysis – Davao City
 Analyzing coffee shop sales to find revenue leaks.
 
 ## Business Questions
