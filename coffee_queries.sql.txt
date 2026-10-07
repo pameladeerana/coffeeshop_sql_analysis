@@ -1,0 +1,46 @@
+-- COFFEE SHOP ANALYSIS MINI PROJECT
+-- Database: coffeeshop_db
+-- Table: coffee_data
+-- Columns: transaction_id, transaction_date, transaction_time, product_category, product_name, quantity, unit_price (PHP), total_amount (PHP), payment_method, store_location
+
+-- 1. Total revenue
+SELECT SUM(`total_amount (PHP)`) AS total_revenue 
+FROM coffee_data;
+
+-- 2. Revenue by product (which product makes most money?)
+SELECT product_name, SUM(`total_amount (PHP)`) AS revenue
+FROM coffee_data
+GROUP BY product_name
+ORDER BY revenue DESC;
+
+-- 3. Which day has lowest sales? (revenue leak)
+SELECT transaction_date, transaction_day, SUM(`total_amount (PHP)`) AS daily_revenue
+FROM coffee_data
+GROUP BY transaction_date, transaction_day
+ORDER BY daily_revenue ASC;
+
+-- 4. Payment method breakdown
+SELECT payment_method, COUNT(*) AS num_transactions, SUM(`total_amount (PHP)`) AS revenue
+FROM coffee_data
+GROUP BY payment_method;
+
+-- 5. Peak hours (when do we sell most?)
+SELECT HOUR(STR_TO_DATE(transaction_time, '%H:%i:%s')) AS hour, COUNT(*) AS orders
+FROM coffee_data
+GROUP BY HOUR(STR_TO_DATE(transaction_time, '%H:%i:%s'))
+ORDER BY hour;
+
+-- 6. Category contribution
+SELECT product_category, SUM(`total_amount (PHP)`) AS revenue
+FROM coffee_data
+GROUP BY product_category
+ORDER BY revenue DESC;
+
+-- 7. Window function + running total + JOIN-ready temporal growth
+SELECT transaction_date, 
+       SUM(`total_amount (PHP)`) AS daily_revenue,
+       SUM(SUM(`total_amount (PHP)`)) OVER (ORDER BY STR_TO_DATE(transaction_date, '%m/%d/%Y')) AS running_total,
+       LAG(SUM(`total_amount (PHP)`)) OVER (ORDER BY STR_TO_DATE(transaction_date, '%m/%d/%Y')) AS previous_day_revenue
+FROM coffee_data
+GROUP BY transaction_date
+ORDER BY STR_TO_DATE(transaction_date, '%m/%d/%Y');

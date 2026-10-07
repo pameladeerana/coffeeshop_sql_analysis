@@ -1,0 +1,33 @@
+-- 1. table coffee_data import wizard
+-- exact copy from workbench 
+-- database: coffeeshop_db
+
+  transaction_id int,
+  transaction_date text,
+  transaction_day text,
+  transaction_time text,
+  product_category text,
+  product_name text,
+  quantity int,
+  `unit_price (PHP)` double,
+  `total_amount (PHP)` double,
+  payment_method text,
+  store_location text
+
+
+
+-- 2. proper schema from scratch
+
+create table coffee_data_proper (
+  transaction_id int primary key,
+  transaction_date date,
+  transaction_day varchar(10),
+  transaction_time time,
+  product_category varchar(50),
+  product_name varchar(100),
+  quantity int,
+  unit_price decimal(10,2),
+  total_amount decimal(10,2),
+  payment_method varchar(20),
+  store_location varchar(50)
+);
